@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kasturi Ghar | Detroit, MI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EC;
+    --warm-white: #FDFAF5;
+    --saffron: #E8852A;
+    --saffron-light: #F0A44F;
+    --turmeric: #C8A04A;
+    --deep-green: #2C4A35;
+    --leaf: #3D6349;
+    --bark: #5C3D1E;
+    --text: #1E1A14;
+    --text-muted: #6B5E4A;
+    --border: rgba(92,61,30,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(253,250,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--deep-green);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--saffron); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+  .nav-cta {
+    background: var(--deep-green); color: var(--cream) !important;
+    padding: 10px 22px; border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--saffron) !important; color: var(--warm-white) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { width: 24px; height: 2px; background: var(--text); display: block; transition: 0.3s; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 60px 80px 60px;
+    position: relative;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+    background: radial-gradient(ellipse at 20% 60%, rgba(200,160,74,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--saffron); font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .hero-tag::before {
+    content: ''; width: 28px; height: 1px; background: var(--saffron);
+  }
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 5vw, 5.2rem);
+    font-weight: 300;
+    line-height: 1.08;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .hero-h1 em {
+    font-style: italic; color: var(--deep-green);
+  }
+  .hero-subtitle {
+    font-size: 1rem; color: var(--text-muted); line-height: 1.7;
+    max-width: 440px; margin-bottom: 44px; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--saffron); color: #fff;
+    padding: 15px 34px; border-radius: 2px;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--bark); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--deep-green); color: var(--deep-green);
+    padding: 14px 32px; border-radius: 2px;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--deep-green); color: var(--cream); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 60px;
+    padding-top: 40px; border-top: 1px solid var(--border);
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300; color: var(--saffron); line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+  .hero-right {
+    background: var(--deep-green);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 70% 30%, rgba(232,133,42,0.25) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(200,160,74,0.18) 0%, transparent 45%);
+  }
+  .hero-botanical {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+    padding: 60px 40px;
+  }
+  .botanical-circle {
+    width: 320px; height: 320px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .botanical-circle::before {
+    content: '';
+    position: absolute; inset: 16px; border-radius: 50%;
+    border: 1px solid rgba(232,133,42,0.3);
+  }
+  .botanical-inner {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--cream); text-align: center;
+    font-size: 1.1rem; font-weight: 300; font-style: italic;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .botanical-inner strong {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 600; font-style: normal;
+    color: var(--saffron-light); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .hero-quote {
+    color: rgba(247,243,236,0.55);
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    text-align: center;
+  }
+  .floating-tag {
+    position: absolute;
+    background: var(--saffron);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.04em;
+    animation: float 4s ease-in-out infinite;
+  }
+  .ft1 { top: 18%; left: 8%; animation-delay: 0s; }
+  .ft2 { top: 60%; right: 6%; animation-delay: 1.5s; }
+  .ft3 { bottom: 18%; left: 12%; animation-delay: 3s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* SECTION BASE */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--saffron); font-weight: 500; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--saffron); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+    font-weight: 300; line-height: 1.15;
+    color: var(--text);
+  }
+  .section-title em { font-style: italic; color: var(--deep-green); }
+
+  /* ABOUT */
+  #about {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center; background: var(--cream);
+  }
+  .about-visual {
+    position: relative; height: 520px;
+  }
+  .about-card {
+    position: absolute;
+    background: var(--deep-green);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cream);
+  }
+  .ac1 { width: 65%; height: 75%; top: 0; left: 0; }
+  .ac2 { width: 50%; height: 55%; bottom: 0; right: 0; background: var(--saffron); }
+  .ac3 {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: var(--turmeric);
+    bottom: 30%; left: 55%;
+    z-index: 3;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; text-align: center; padding: 16px;
+    line-height: 1.4;
+  }
+  .card-inner {
+    padding: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; font-style: italic;
+    text-align: center; line-height: 1.4;
+    color: rgba(247,243,236,0.9);
+  }
+  .about-text { padding-right: 20px; }
+  .about-text p {
+    font-size: 1rem; color: var(--text-muted); line-height: 1.8;
+    margin-bottom: 20px; font-weight: 300;
+  }
+  .about-text p strong { color: var(--bark); font-weight: 500; }
+  .values-list { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+  .value-item { display: flex; gap: 20px; align-items: flex-start; }
+  .value-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--deep-green); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .value-text h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 600; color: var(--text);
+    margin-bottom: 4px;
+  }
+  .value-text p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+  /* PRODUCTS */
+  #products { background: var(--warm-white); }
+  .products-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .products-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .product-card {
+    border: 1px solid var(--border); border-radius: 4px;
+    overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+    background: var(--cream);
+  }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(92,61,30,0.12); }
+  .product-card.featured {
+    grid-column: span 2;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .product-img {
+    height: 200px; display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem; position: relative; overflow: hidden;
+  }
+  .product-card.featured .product-img { height: 100%; min-height: 240px; }
+  .pi-green { background: linear-gradient(135deg, #2C4A35, #3D6349); }
+  .pi-saffron { background: linear-gradient(135deg, #C8A04A, #E8852A); }
+  .pi-red { background: linear-gradient(135deg, #8B3A3A, #C15454); }
+  .pi-purple { background: linear-gradient(135deg, #4A3265, #7B5EA7); }
+  .pi-teal { background: linear-gradient(135deg, #1D5C5C, #2E8B8B); }
+  .product-body { padding: 24px; }
+  .product-tag {
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--saffron); font-weight: 500; margin-bottom: 8px;
+  }
+  .product-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; margin-bottom: 10px;
+  }
+  .product-card.featured .product-body { display: flex; flex-direction: column; justify-content: center; padding: 40px; }
+  .product-card.featured .product-body h3 { font-size: 2rem; }
+  .product-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* PROJECTS */
+  #projects { background: var(--deep-green); color: var(--cream); }
+  #projects .section-label { color: var(--saffron-light); }
+  #projects .section-label::before { background: var(--saffron-light); }
+  #projects .section-title { color: var(--cream); }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; }
+  .project-card {
+    border: 1px solid rgba(247,243,236,0.12);
+    border-radius: 4px; padding: 40px; position: relative;
+    transition: border-color 0.3s, background 0.3s;
+    overflow: hidden;
+  }
+  .project-card:hover { border-color: var(--saffron); background: rgba(232,133,42,0.05); }
+  .project-card.highlight {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  }
+  .project-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 300; color: rgba(247,243,236,0.08);
+    position: absolute; top: 20px; right: 28px; line-height: 1;
+    pointer-events: none;
+  }
+  .project-card.highlight .project-number { color: rgba(0,0,0,0.08); }
+  .project-tag {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--saffron-light); font-weight: 500; margin-bottom: 12px;
+  }
+  .project-card.highlight .project-tag { color: rgba(0,0,0,0.5); }
+  .project-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400; margin-bottom: 16px;
+  }
+  .project-card.highlight h3 { font-size: 2.6rem; color: #fff; }
+  .project-card p { font-size: 0.9rem; color: rgba(247,243,236,0.65); line-height: 1.7; }
+  .project-card.highlight p { color: rgba(255,255,255,0.85); font-size: 1rem; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 24px; font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    color: var(--saffron-light); transition: gap 0.2s;
+  }
+  .project-card.highlight .project-link { color: #fff; }
+  .project-link:hover { gap: 14px; }
+  .support-cta {
+    margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap;
+  }
+
+  /* COMMUNITY */
+  #community { background: var(--cream); }
+  .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
+  .community-card {
+    padding: 36px 32px; border: 1px solid var(--border); border-radius: 4px;
+    transition: all 0.3s;
+  }
+  .community-card:hover { border-color: var(--saffron); transform: translateY(-4px); }
+  .cc-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--deep-green); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 24px;
+  }
+  .community-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; margin-bottom: 12px;
+  }
+  .community-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* GALLERY STRIP */
+  #gallery { padding: 80px 0; overflow: hidden; background: var(--warm-white); }
+  .gallery-track {
+    display: flex; gap: 20px;
+    animation: scroll 30s linear infinite;
+    width: max-content;
+  }
+  .gallery-track:hover { animation-play-state: paused; }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .gal-item {
+    width: 200px; height: 160px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  #contact {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    background: var(--warm-white);
+  }
+  .contact-info { padding-right: 20px; }
+  .contact-info p {
+    font-size: 1rem; color: var(--text-muted); line-height: 1.8; margin: 24px 0 40px;
+  }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .cd-item { display: flex; gap: 16px; align-items: flex-start; }
+  .cd-icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--saffron); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem; flex-shrink: 0;
+  }
+  .cd-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+  .cd-text strong { display: block; color: var(--text); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .contact-form { background: var(--cream); padding: 48px; border-radius: 4px; }
+  .contact-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400; margin-bottom: 32px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-group label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--warm-white); border: 1px solid var(--border);
+    border-radius: 2px; padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--saffron);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit { width: 100%; margin-top: 8px; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
+  .social-links { display: flex; gap: 14px; margin-top: 36px; }
+  .social-link {
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 1rem; color: var(--text-muted);
+    transition: all 0.2s;
+  }
+  .social-link:hover { border-color: var(--saffron); color: var(--saffron); background: rgba(232,133,42,0.08); }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    color: rgba(247,243,236,0.6);
+    padding: 60px 60px 40px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  }
+  .footer-brand .nav-logo { color: var(--cream); margin-bottom: 16px; display: block; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(247,243,236,0.9); margin-bottom: 20px; font-weight: 500;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { font-size: 0.85rem; color: rgba(247,243,236,0.55); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--saffron-light); }
+  .footer-bottom {
+    background: var(--text); color: rgba(247,243,236,0.3);
+    padding: 20px 60px; font-size: 0.78rem;
+    border-top: 1px solid rgba(247,243,236,0.08);
+    display: flex; justify-content: space-between;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE NAV */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: var(--warm-white); padding: 100px 40px 40px;
+    flex-direction: column; gap: 32px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 300; color: var(--text);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--saffron); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 70px 24px; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 380px; }
+    .hero-left { padding: 60px 24px; }
+    #about { grid-template-columns: 1fr; }
+    .about-visual { height: 300px; }
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .product-card.featured .product-img { min-height: 200px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.highlight { grid-column: span 1; grid-template-columns: 1fr; }
+    .community-grid { grid-template-columns: 1fr; }
+    #contact { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr 1fr; gap: 32px; padding: 40px 24px; }
+    .footer-bottom { padding: 20px 24px; flex-direction: column; gap: 8px; }
+    .form-row { grid-template-columns: 1fr; }
+    .products-intro { flex-direction: column; align-items: flex-start; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Kasturi<span>Ghar</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#products" onclick="toggleMenu()">Products</a>
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#community" onclick="toggleMenu()">Community</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Detroit, Michigan</div>
+    <h1 class="hero-h1">From the<br><em>Farm</em> to<br>Your Table</h1>
+    <p class="hero-subtitle">Kasturi Ghar is committed to promoting local produce and small businesses in the Detroit community — connecting neighborhoods with fresh, honest food.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#community" class="btn-outline">Our Community</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">840+</span>
+        <span class="stat-label">Community Members</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Local Sourced</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Detroit</span>
+        <span class="stat-label">Based & Proud</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern"></div>
+    <div class="hero-botanical">
+      <div class="botanical-circle">
+        <div class="botanical-inner">
+          <strong>कस्तुरी</strong>
+          Musk · Fragrance<br>of the Homeland
+        </div>
+      </div>
+      <p class="hero-quote">Rooted in culture. Growing in Detroit.</p>
+    </div>
+    <div class="floating-tag ft1">🌿 Fresh &amp; Local</div>
+    <div class="floating-tag ft2">🏪 Small Business</div>
+    <div class="floating-tag ft3">❤️ Community First</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual fade-up">
+    <div class="about-card ac1">
+      <div class="card-inner">"Where community,<br>culture &amp; food unite"</div>
+    </div>
+    <div class="about-card ac2">
+      <div class="card-inner" style="font-size:1.2rem;">Supporting local<br>farmers &amp; makers<br>across Detroit</div>
+    </div>
+    <div class="about-card ac3">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;text-align:center;">Since<br><strong style="font-size:1.8rem;">2020</strong></div>
+    </div>
+  </div>
+  <div class="about-text fade-up">
+    <div class="section-label">About Kasturi Ghar</div>
+    <h2 class="section-title">A <em>home</em> for<br>local produce &amp;<br>local business</h2>
+    <div style="height:24px;"></div>
+    <p>Kasturi Ghar — meaning <strong>"house of musk"</strong> — is a Detroit-based initiative focused on promoting the freshest local produce alongside the vibrant small businesses that make our city unique.</p>
+    <p>We believe that buying local isn't just a transaction — it's an act of community. Every purchase supports a neighbor, a family farm, or an independent maker working hard to bring quality goods to our tables.</p>
+    <p>From seasonal Michigan produce to handcrafted goods, we bring you the best of Detroit's growing ecosystem.</p>
+    <div class="values-list">
+      <div class="value-item">
+        <div class="value-icon">🌱</div>
+        <div class="value-text">
+          <h4>Farm Fresh</h4>
+          <p>Direct relationships with Michigan farms ensure the freshest seasonal produce year-round.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">🏘️</div>
+        <div class="value-text">
+          <h4>Community Rooted</h4>
+          <p>Every dollar spent here stays local, supporting Detroit families and independent businesses.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">♻️</div>
+        <div class="value-text">
+          <h4>Sustainably Minded</h4>
+          <p>We prioritize seasonal, low-impact sourcing that respects both people and the planet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-intro fade-up">
+    <div>
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Fresh finds &amp;<br><em>local favorites</em></h2>
+    </div>
+    <a href="#contact" class="btn-outline">Inquire Now →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card featured fade-up">
+      <div class="product-img pi-green">🌿</div>
+      <div class="product-body">
+        <div class="product-tag">Seasonal Highlight</div>
+        <h3>Michigan Grown Produce</h3>
+        <p>From sweet summer corn and heirloom tomatoes to crisp autumn apples and winter squash — we source directly from Michigan farms to bring you produce at its absolute freshest.</p>
+        <br>
+        <a href="#contact" class="btn-primary" style="font-size:0.8rem;padding:12px 24px;">Learn More</a>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-img pi-saffron">🫙</div>
+      <div class="product-body">
+        <div class="product-tag">Artisan Goods</div>
+        <h3>Spices &amp; Pantry</h3>
+        <p>Curated selection of spices, condiments, and pantry staples from local producers and South Asian specialty makers.</p>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-img pi-red">🫚</div>
+      <div class="product-body">
+        <div class="product-tag">Local Makers</div>
+        <h3>Handcrafted Products</h3>
+        <p>Supporting Detroit-area artisans with handcrafted goods — oils, preserves, honey, and more made with care.</p>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-img pi-purple">🎋</div>
+      <div class="product-body">
+        <div class="product-tag">Cultural</div>
+        <h3>South Asian Specialty</h3>
+        <p>Hard-to-find ingredients and goods that connect our community to beloved flavors from home.</p>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-img pi-teal">🌸</div>
+      <div class="product-body">
+        <div class="product-tag">Seasonal</div>
+        <h3>Flowers &amp; Plants</h3>
+        <p>Fresh-cut flowers and potted plants from local growers, bringing natural beauty to Detroit homes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="fade-up">
+    <div class="section-label">Upcoming &amp; Current</div>
+    <h2 class="section-title" style="color:var(--cream);">Projects making<br><em style="color:var(--saffron-light);">Detroit better</em></h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card highlight fade-up">
+      <div>
+        <div class="project-tag">Featured Project</div>
+        <h3>Nepal Lego Initiative</h3>
+        <p>Our newest project bridges communities — using the universal language of creativity to connect Detroit's South Asian diaspora with youth education, cultural storytelling, and hands-on learning.</p>
+        <div class="support-cta">
+          <a href="#contact" class="btn-primary" style="background:#fff;color:var(--saffron);font-size:0.8rem;padding:12px 24px;">Support Us</a>
+          <a href="#contact" class="btn-outline" style="border-color:#fff;color:#fff;font-size:0.8rem;padding:11px 24px;">Learn More</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <div style="width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:5rem;">🧱</div>
+      </div>
+      <div class="project-number">01</div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-number">02</div>
+      <div class="project-tag">Community Program</div>
+      <h3>Local Business Directory</h3>
+      <p>Building a living directory of South Asian-owned and Detroit-local businesses to make it easier to shop with intention and support our neighbors.</p>
+      <a href="#contact" class="project-link">Get Listed →</a>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-number">03</div>
+      <div class="project-tag">Farmers Market</div>
+      <h3>Pop-Up Market Events</h3>
+      <p>Regular pop-up events in the Detroit metro area connecting local growers, makers, and community members in celebration of culture and fresh food.</p>
+      <a href="#contact" class="project-link">Stay Informed →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="fade-up" style="text-align:center;">
+    <div class="section-label" style="justify-content:center;">Our Community</div>
+    <h2 class="section-title">How we <em>come together</em></h2>
+    <p style="margin-top:16px;color:var(--text-muted);max-width:520px;margin-inline:auto;font-size:0.95rem;line-height:1.8;">Kasturi Ghar is more than a store — it's a gathering point for Detroit's South Asian community and local food lovers alike.</p>
+  </div>
+  <div class="community-grid">
+    <div class="community-card fade-up">
+      <div class="cc-icon">🌾</div>
+      <h3>Support Local Farmers</h3>
+      <p>We partner directly with Michigan family farms to ensure producers receive fair prices while you receive the freshest possible products, straight from the source.</p>
+    </div>
+    <div class="community-card fade-up">
+      <div class="cc-icon">🏪</div>
+      <h3>Amplify Small Business</h3>
+      <p>From artisan food makers to cultural goods sellers, we actively promote and feature independent Detroit businesses that deserve a wider audience.</p>
+    </div>
+    <div class="community-card fade-up">
+      <div class="cc-icon">🤝</div>
+      <h3>Cultural Connection</h3>
+      <p>We celebrate the diversity of Detroit by honoring the culinary traditions and community ties that make this city extraordinary.</p>
+    </div>
+    <div class="community-card fade-up">
+      <div class="cc-icon">🎓</div>
+      <h3>Youth Programs</h3>
+      <p>Through initiatives like Nepal Lego, we invest in the next generation — combining education, creativity, and cultural pride for Detroit's youth.</p>
+    </div>
+    <div class="community-card fade-up">
+      <div class="cc-icon">📣</div>
+      <h3>Events &amp; Pop-Ups</h3>
+      <p>Regular community events, farmers markets, and cultural celebrations throughout the year in Detroit and surrounding areas.</p>
+    </div>
+    <div class="community-card fade-up">
+      <div class="cc-icon">💛</div>
+      <h3>Give Back</h3>
+      <p>A portion of every sale supports community initiatives, food access programs, and local causes that strengthen Detroit neighborhoods.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div id="gallery">
+  <div class="gallery-track">
+    <div class="gal-item" style="background:#2C4A35;">🥬</div>
+    <div class="gal-item" style="background:#C8A04A;">🌽</div>
+    <div class="gal-item" style="background:#8B3A3A;">🍅</div>
+    <div class="gal-item" style="background:#3D6349;">🫚</div>
+    <div class="gal-item" style="background:#4A3265;">🫙</div>
+    <div class="gal-item" style="background:#E8852A;">🍎</div>
+    <div class="gal-item" style="background:#1D5C5C;">🌿</div>
+    <div class="gal-item" style="background:#5C3D1E;">🧅</div>
+    <div class="gal-item" style="background:#2C4A35;">🥕</div>
+    <div class="gal-item" style="background:#C8A04A;">🌸</div>
+    <!-- duplicate for seamless loop -->
+    <div class="gal-item" style="background:#2C4A35;">🥬</div>
+    <div class="gal-item" style="background:#C8A04A;">🌽</div>
+    <div class="gal-item" style="background:#8B3A3A;">🍅</div>
+    <div class="gal-item" style="background:#3D6349;">🫚</div>
+    <div class="gal-item" style="background:#4A3265;">🫙</div>
+    <div class="gal-item" style="background:#E8852A;">🍎</div>
+    <div class="gal-item" style="background:#1D5C5C;">🌿</div>
+    <div class="gal-item" style="background:#5C3D1E;">🧅</div>
+    <div class="gal-item" style="background:#2C4A35;">🥕</div>
+    <div class="gal-item" style="background:#C8A04A;">🌸</div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info fade-up">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's grow<br><em>together</em></h2>
+    <p>Whether you're a local farmer looking to partner, a small business wanting to be featured, or a community member wanting to stay connected — we'd love to hear from you.</p>
+    <div class="contact-details">
+      <div class="cd-item">
+        <div class="cd-icon">📍</div>
+        <div class="cd-text"><strong>Location</strong>Detroit, Michigan, USA</div>
+      </div>
+      <div class="cd-item">
+        <div class="cd-icon">📘</div>
+        <div class="cd-text"><strong>Facebook</strong><a href="https://www.facebook.com/kasturighar/" target="_blank" style="color:var(--saffron);text-decoration:none;">facebook.com/kasturighar</a></div>
+      </div>
+      <div class="cd-item">
+        <div class="cd-icon">🌐</div>
+        <div class="cd-text"><strong>Website</strong>kasturighar.org</div>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/kasturighar/" class="social-link" target="_blank" title="Facebook">f</a>
+      <a href="#" class="social-link" title="Instagram">ig</a>
+      <a href="#" class="social-link" title="Twitter">tw</a>
+    </div>
+  </div>
+  <div class="contact-form fade-up">
+    <h3>Send us a message</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Priya">
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Sharma">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="hello@example.com">
+    </div>
+    <div class="form-group">
+      <label>I'm interested in...</label>
+      <select>
+        <option value="">Select an option</option>
+        <option>Buying local produce</option>
+        <option>Partnering as a farmer / producer</option>
+        <option>Featuring my small business</option>
+        <option>Supporting the Nepal Lego project</option>
+        <option>Attending a community event</option>
+        <option>General inquiry</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <textarea placeholder="Tell us a little about yourself and what brings you here..."></textarea>
+    </div>
+    <button class="btn-primary form-submit" onclick="handleSubmit(this)">Send Message</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="#" class="nav-logo">Kasturi<span style="color:var(--saffron);">Ghar</span></a>
+    <p>Promoting local produce and independent businesses in Detroit, Michigan. Rooted in community, growing with purpose.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Get Involved</h4>
+    <ul>
+      <li><a href="#contact">Partner With Us</a></li>
+      <li><a href="#contact">List Your Business</a></li>
+      <li><a href="#contact">Support Nepal Lego</a></li>
+      <li><a href="#contact">Volunteer</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <ul>
+      <li><a href="https://www.facebook.com/kasturighar/" target="_blank">Facebook</a></li>
+      <li><a href="#contact">Instagram</a></li>
+      <li><a href="#contact">Newsletter</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 Kasturi Ghar · Detroit, Michigan</span>
+  <span>Promoting local. Building community.</span>
+</div>
+
+<script>
+  // Mobile menu toggle
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Stagger fade-up children
+  document.querySelectorAll('.products-grid .product-card, .projects-grid .project-card, .community-grid .community-card').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 3) * 0.12}s`;
+  });
+
+  // Form submit feedback
+  function handleSubmit(btn) {
+    btn.textContent = 'Message Sent! ✓';
+    btn.style.background = 'var(--deep-green)';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  }
+
+  // Nav shrink on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      nav.style.padding = '12px 60px';
+    } else {
+      nav.style.padding = '';
+    }
+  });
+</script>
+</body>
+</html>
